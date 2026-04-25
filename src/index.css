@@ -1,0 +1,73 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    @apply bg-(--color-pri) text-0;
+    animation: neon-colors 20s linear infinite;
+  }
+}
+
+@theme {
+  --text--2: clamp(0.6076rem, 0.5944rem + 0.0588vw, 0.64rem);
+  --text--1: clamp(0.7292rem, 0.7002rem + 0.1288vw, 0.8rem);
+  --text-0: clamp(0.875rem, 0.8239rem + 0.2273vw, 1rem);
+  --text-1: clamp(1.05rem, 0.9682rem + 0.3636vw, 1.25rem);
+  --text-2: clamp(1.26rem, 1.1363rem + 0.55vw, 1.5625rem);
+  --text-3: clamp(1.512rem, 1.3315rem + 0.802vw, 1.9531rem);
+  --text-4: clamp(1.8144rem, 1.5579rem + 1.14vw, 2.4414rem);
+  --text-5: clamp(2.1773rem, 1.8195rem + 1.59vw, 3.0518rem);
+
+  --leading-sub1: 0.9;
+  --leading-sub2: 0.8;
+
+  --animate-rotate-gradient: rotate-gradient 20s linear infinite;
+
+  @keyframes rotate-gradient {
+    from {
+      --angle: 0deg;
+    }
+    to {
+      --angle: 360deg;
+    }
+  }
+}
+
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@property --neon-color {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #f50;
+}
+
+@keyframes neon-colors {
+  0% {
+    --neon-color: #f50;
+  }
+  25% {
+    --neon-color: #0c6;
+  }
+  50% {
+    --neon-color: #08f;
+  }
+  75% {
+    --neon-color: #f6f;
+  }
+  100% {
+    --neon-color: #f50;
+  }
+}
+
+@theme inline {
+  --color-pri: var(--color-green-200);
+}
+
+@media (prefers-color-scheme: dark) {
+  @theme inline {
+    --color-pri: var(--color-olive-900);
+  }
+}
