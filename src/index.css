@@ -1,13 +1,19 @@
+@import url("https://fonts.googleapis.com/css2?family=Audiowide&display=swap");
 @import "tailwindcss";
 
 @layer base {
   :root {
-    @apply bg-(--color-pri) text-0;
+    @apply bg-(--color-pri) text-0 text-text tracking-wide;
     animation: neon-colors 20s linear infinite;
+  }
+  * {
+    box-sizing: border-box;
   }
 }
 
 @theme {
+  --default-font-family: "Audiowide", var(--font-sans);
+
   --text--2: clamp(0.6076rem, 0.5944rem + 0.0588vw, 0.64rem);
   --text--1: clamp(0.7292rem, 0.7002rem + 0.1288vw, 0.8rem);
   --text-0: clamp(0.875rem, 0.8239rem + 0.2273vw, 1rem);
@@ -17,8 +23,21 @@
   --text-4: clamp(1.8144rem, 1.5579rem + 1.14vw, 2.4414rem);
   --text-5: clamp(2.1773rem, 1.8195rem + 1.59vw, 3.0518rem);
 
+  --color-pri: var(--color-olive-200);
+  --color-sec: var(--color-olive-100);
+  --color-text: var(--color-slate-900);
+
   --leading-sub1: 0.9;
   --leading-sub2: 0.8;
+
+  --color-shadow: color-mix(in oklch, var(--neon-color) 10%, transparent);
+
+  --shadow-nav-left: 2px 2px 0px 3px var(--color-shadow);
+  --shadow-nav-right: -2px 2px 0px 3px var(--color-shadow);
+  --shadow-nav-hover:
+    inset 0 0 35px 20px var(--color-shadow), 0 0 5px 8px var(--color-shadow);
+  --shadow-head:
+    inset 0 0 15px 10px var(--color-shadow), 0 0 10px 8px var(--color-shadow);
 
   --animate-rotate-gradient: rotate-gradient 20s linear infinite;
 
@@ -27,8 +46,16 @@
       --angle: 0deg;
     }
     to {
-      --angle: 360deg;
+      --angle: 359deg;
     }
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-pri: var(--color-stone-950);
+    --color-sec: var(--color-stone-900);
+    --color-text: var(--color-slate-400);
   }
 }
 
@@ -37,7 +64,6 @@
   initial-value: 0deg;
   inherits: false;
 }
-
 @property --neon-color {
   syntax: "<color>";
   inherits: true;
@@ -48,26 +74,13 @@
   0% {
     --neon-color: #f50;
   }
-  25% {
+  33% {
+    --neon-color: #44f;
+  }
+  66% {
     --neon-color: #0c6;
-  }
-  50% {
-    --neon-color: #08f;
-  }
-  75% {
-    --neon-color: #f6f;
   }
   100% {
     --neon-color: #f50;
-  }
-}
-
-@theme inline {
-  --color-pri: var(--color-green-200);
-}
-
-@media (prefers-color-scheme: dark) {
-  @theme inline {
-    --color-pri: var(--color-olive-900);
   }
 }
