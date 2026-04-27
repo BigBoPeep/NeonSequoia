@@ -1,4 +1,6 @@
 import { create } from "zustand";
+import song1 from "./assets/music/dance-playful-night.mp3";
+import song2 from "./assets/music/dark-cyberpunk.mp3";
 
 export const links = {
   group1: { Home: "/", About: "/about", Listen: "/listen" },
@@ -36,6 +38,11 @@ export const tourDates = [
     location: "London, UK",
     status: "Low Availability",
   },
+];
+
+export const songFiles = [
+  { id: 1, src: song1, name: "Dance Playful Night" },
+  { id: 2, src: song2, name: "Dark Cyberpunk" },
 ];
 
 // interface AppStore {

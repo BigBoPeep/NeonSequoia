@@ -19,7 +19,7 @@ export default function NavBar({
 
   return (
     <div
-      className={`flex flex-col justify-evenly h-full w-full ${alignment} ${className}`}
+      className={`flex flex-col justify-evenly h-full w-full min-w-0 ${alignment} ${className}`}
     >
       {Object.entries(navLinks).map(([text, path], i) => {
         return (

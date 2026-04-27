@@ -1,13 +1,21 @@
 @import url("https://fonts.googleapis.com/css2?family=Audiowide&display=swap");
 @import "tailwindcss";
 
+html {
+  interpolate-size: allow-keywords;
+}
+
 @layer base {
   :root {
     @apply bg-(--color-pri) text-0 text-text tracking-wide;
     animation: neon-colors 20s linear infinite;
   }
   * {
+    @apply focus:outline-none focus:ring-2 focus:ring-(--color-focus);
     box-sizing: border-box;
+  }
+  button {
+    cursor: pointer;
   }
 }
 
@@ -26,6 +34,12 @@
   --color-pri: var(--color-olive-200);
   --color-sec: var(--color-olive-100);
   --color-text: var(--color-slate-900);
+  --color-focus: var(--color-red-600);
+
+  --color-control-bg: var(--color-mist-700);
+  --color-control-thumb: var(--color-orange-300);
+  --color-control-track-1: var(--color-zinc-400);
+  --color-control-track-2: var(--color-zinc-600);
 
   --leading-sub1: 0.9;
   --leading-sub2: 0.8;
