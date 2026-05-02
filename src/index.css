@@ -34,24 +34,32 @@ html {
   --color-pri: var(--color-olive-200);
   --color-sec: var(--color-olive-100);
   --color-text: var(--color-slate-900);
-  --color-focus: var(--color-red-600);
+  --color-focus: var(--color-lime-600);
 
-  --color-control-bg: var(--color-mist-700);
-  --color-control-thumb: var(--color-orange-300);
-  --color-control-track-1: var(--color-zinc-400);
-  --color-control-track-2: var(--color-zinc-600);
+  --color-control-bg: var(--color-mist-400);
+  --color-control-thumb: var(--color-olive-800);
+  --color-control-track-1: color-mix(in oklch, black 20%, transparent);
+  --color-control-track-2: color-mix(in oklch, black 50%, transparent);
 
   --leading-sub1: 0.9;
   --leading-sub2: 0.8;
 
-  --color-shadow: color-mix(in oklch, var(--neon-color) 10%, transparent);
+  --color-shadow: color-mix(in oklch, var(--neon-color) 40%, transparent);
 
-  --shadow-nav-left: 2px 2px 0px 3px var(--color-shadow);
-  --shadow-nav-right: -2px 2px 0px 3px var(--color-shadow);
+  --shadow-btn:
+    inset 0 0 5px 0px color-mix(in oklch, black 50%, transparent),
+    1px 2px 5px -2px black;
+  --shadow-btn-hover:
+    inset 0 0 10px 0px color-mix(in oklch, black 50%, transparent),
+    1px 2px 5px -2px black;
+  --shadow-nav-left: 2px 2px 0px 1px var(--color-shadow);
+  --shadow-nav-left-hover: 0px 0px 0px 4px var(--color-shadow);
+  --shadow-nav-right: -2px 2px 0px 1px var(--color-shadow);
+  --shadow-nav-right-hover: 0px 0px 0px 4px var(--color-shadow);
   --shadow-nav-hover:
     inset 0 0 35px 20px var(--color-shadow), 0 0 5px 8px var(--color-shadow);
   --shadow-head:
-    inset 0 0 15px 10px var(--color-shadow), 0 0 10px 8px var(--color-shadow);
+    inset 0 0 10px 0px var(--color-shadow), 0 0 10px 0px var(--color-shadow);
 
   --animate-rotate-gradient: rotate-gradient 20s linear infinite;
 
@@ -70,6 +78,7 @@ html {
     --color-pri: var(--color-stone-950);
     --color-sec: var(--color-stone-900);
     --color-text: var(--color-slate-400);
+    --color-control-bg: var(--color-mist-700);
   }
 }
 

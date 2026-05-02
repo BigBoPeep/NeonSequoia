@@ -24,13 +24,19 @@ export default function NavBar({
       {Object.entries(navLinks).map(([text, path], i) => {
         return (
           <div
-            className={`${linkStyles[i]} rounded-md h-fit p-1 bg-(--color-pri) 
-            opacity-50 hover:opacity-100
-            ${align === "left" ? "shadow-nav-left/15" : "shadow-nav-right/15"}`}
+            className={`${linkStyles[i]} rounded-md h-fit bg-(--color-pri) 
+            opacity-70 cursor-pointer
+            ${
+              align === "left"
+                ? "shadow-nav-left/55 hover:shadow-nav-left-hover/55"
+                : "shadow-nav-right/55 hover:shadow-nav-right-hover/55"
+            }`}
             key={i}
           >
-            <Link to={path}>
-              <div className={`h-full text-center content-center`}>{text}</div>
+            <Link to={path} className="block">
+              <div className={`h-full text-center content-center p-1`}>
+                {text}
+              </div>
             </Link>
           </div>
         );

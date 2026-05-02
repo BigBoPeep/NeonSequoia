@@ -1,7 +1,10 @@
+import { useState, useEffect, useMemo, useRef } from "react";
 import { useAudio, formatTime } from "@sina_byn/re-audio";
 import { Range, Direction, getTrackBackground } from "react-range";
+import { debounce } from "../modules/utils";
 import {
   Volume,
+  Volume1,
   Volume2,
   VolumeOff,
   Play,
@@ -18,13 +21,24 @@ export default function MusicControls() {
     nextTrack,
     duration,
     currentTime,
-    timeLeft,
     setCurrentTime,
     volume,
     setVolume,
     currentTrack,
     toggleMuted,
+    muted,
   } = useAudio();
+  const [seekTime, setSeekTime] = useState(currentTime);
+  const isSeeking = useRef(false);
+
+  useEffect(() => {
+    if (!isSeeking.current) setSeekTime(currentTime);
+  }, [currentTime]);
+
+  const debouncedSetCurrentTime = useMemo(
+    () => debounce((value: number) => setCurrentTime(value), 300),
+    [setCurrentTime],
+  );
 
   return (
     <div
@@ -33,19 +47,24 @@ export default function MusicControls() {
     >
       {/* Seek Bar */}
       <div className="flex items-center gap-4">
-        <div className="min-w-15 max-w-15">{formatTime(currentTime)}</div>
+        <div className="font-mono">{formatTime(seekTime).substring(1)}</div>
         <Range
           label="Seek"
           min={0}
           max={duration || 1}
           step={1}
-          values={[currentTime]}
+          values={[seekTime]}
           onChange={(values) => {
-            if (currentTrack !== null) setCurrentTime(values[0]);
+            if (currentTrack !== null) {
+              isSeeking.current = true;
+              setSeekTime(values[0]);
+              debouncedSetCurrentTime(values[0]);
+            }
           }}
+          onFinalChange={() => (isSeeking.current = false)}
           renderTrack={({ props, children }) => (
             <div
-              onClick={(e) => e.preventDefault()}
+              className="rounded-l-full rounded-r-full"
               {...props}
               style={{
                 ...props.style,
@@ -55,7 +74,7 @@ export default function MusicControls() {
                 background: getTrackBackground({
                   min: 0,
                   max: duration,
-                  values: [currentTime],
+                  values: [seekTime],
                   colors: [
                     "var(--color-control-track-2)",
                     "var(--color-control-track-1)",
@@ -74,25 +93,18 @@ export default function MusicControls() {
                 touchAction: "none",
               }}
               key={props.key}
-              className="w-3 h-3 rounded-full bg-(--color-control-thumb)
-                      "
+              className="size-4 rounded-full bg-(--color-control-thumb)"
             />
           )}
         />
-        {formatTime(timeLeft)}
+        <div className="font-mono">{formatTime(duration).substring(1)}</div>
       </div>
 
-      <div className="flex gap-6 justify-center">
+      <div className="flex gap-6 justify-between">
         {/* Track Controls */}
         <div className="flex gap-2 justify-center items-center">
           <button
-            className="p-2 bg-(--color-control-bg) rounded-full"
-            onClick={prevTrack}
-          >
-            <SkipBack />
-          </button>
-          <button
-            className="size-15 p-2 bg-(--color-control-bg) rounded-full"
+            className="size-12 p-1.5 bg-(--color-control-bg) rounded-full shadow-btn hover:shadow-btn-hover"
             onClick={togglePlay}
           >
             {playing ? (
@@ -102,7 +114,13 @@ export default function MusicControls() {
             )}
           </button>
           <button
-            className="p-2 bg-(--color-control-bg) rounded-full"
+            className="p-1.5 bg-(--color-control-bg) rounded-full shadow-btn hover:shadow-btn-hover"
+            onClick={prevTrack}
+          >
+            <SkipBack />
+          </button>
+          <button
+            className="p-1.5 bg-(--color-control-bg) rounded-full shadow-btn hover:shadow-btn-hover"
             onClick={nextTrack}
           >
             <SkipForward />
@@ -112,13 +130,13 @@ export default function MusicControls() {
         {/* Volume Controls */}
         <div className="flex gap-2 items-center w-fit">
           <button
-            className="p-2 bg-(--color-control-bg) rounded-full"
+            className="p-1.5 bg-(--color-control-bg) rounded-full shadow-btn hover:shadow-btn-hover"
             onClick={toggleMuted}
           >
-            <VolumeOff />
+            {muted ? <Volume1 /> : <VolumeOff />}
           </button>
 
-          <button className="p-2 relative group/vol bg-(--color-control-bg) rounded-full">
+          <button className="p-1.5 relative group/vol bg-(--color-control-bg) rounded-full shadow-btn">
             <Volume2 />
             {/* Slider */}
             <div
@@ -127,9 +145,9 @@ export default function MusicControls() {
                 transition-all opacity-0 transition-discrete origin-bottom
                 overflow-hidden group-hover/vol:h-auto group-hover/vol:opacity-100
                 group-focus-within/vol:h-auto group-focus-within/vol:opacity-100
-                active:h-auto"
+                active:h-auto shadow-btn"
             >
-              <div className="p-2 pb-1">
+              <div className="p-1.5 pb-1">
                 <Volume2 />
               </div>
 
@@ -179,7 +197,7 @@ export default function MusicControls() {
                 )}
               />
 
-              <div className="p-2 pt-1">
+              <div className="p-1.5 pt-1">
                 <Volume />
               </div>
             </div>

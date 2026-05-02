@@ -7,8 +7,8 @@ const groupStyle = "flex w-full items-end justify-between h-full pt-2";
 export default function MusicVisualizer() {
   const frame = useVisualizerFrame(16);
   return (
-    <div className="h-24 flex justify-center">
-      <div className={`flex-row-reverse ${groupStyle}`}>
+    <div className="h-[20dvh] max-h-[20dvh] flex justify-center">
+      <div className={`${groupStyle}`}>
         {frame.map((f, i) => (
           <div
             key={i}
@@ -17,7 +17,7 @@ export default function MusicVisualizer() {
           />
         ))}
       </div>
-      <div className={`ml-[1.12%] ${groupStyle}`}>
+      <div className={`ml-[1.12%] flex-row-reverse ${groupStyle}`}>
         {frame.map((f, i) => (
           <div
             key={i}

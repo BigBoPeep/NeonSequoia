@@ -2,10 +2,15 @@ import { Audio } from "@sina_byn/re-audio";
 import { songFiles } from "../app";
 import MusicControls from "./MusicControls";
 import MusicVisualizer from "./MusicVisualizer";
+import MusicPlaylist from "./MusicPlaylist";
 
-export default function MusicPlayer() {
+export default function MusicPlayer({
+  className = "",
+}: {
+  className?: string;
+}) {
   return (
-    <div className="bg-(--color-pri) p-4 rounded-lg">
+    <div className={`p-4 rounded-lg ${className}`}>
       <Audio playlist={songFiles} defaultVolume={50}>
         {({ trackIndex, playlist }) => (
           <>
@@ -15,6 +20,7 @@ export default function MusicPlayer() {
               {playlist[trackIndex]?.name || "Loading..."}
             </div>
             <MusicControls />
+            <MusicPlaylist className="mt-4 bg-black/10" />
           </>
         )}
       </Audio>

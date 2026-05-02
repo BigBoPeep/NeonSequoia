@@ -2,7 +2,7 @@ import MusicPlayer from "../components/MusicPlayer";
 
 export default function Listen() {
   return (
-    <div>
+    <div className={""}>
       <MusicPlayer />
     </div>
   );

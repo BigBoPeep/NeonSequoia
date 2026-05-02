@@ -1,10 +1,11 @@
-import { create } from "zustand";
 import song1 from "./assets/music/dance-playful-night.mp3";
 import song2 from "./assets/music/dark-cyberpunk.mp3";
+import song3 from "./assets/music/running-night.mp3";
+import song4 from "./assets/music/tell-me-what.mp3";
 
 export const links = {
   group1: { Home: "/", About: "/about", Listen: "/listen" },
-  group2: { Store: "/store", Dates: "/dates", Test3: "/" },
+  group2: { Store: "/store", Dates: "/dates", News: "/news" },
 };
 
 export const tourDates = [
@@ -41,8 +42,10 @@ export const tourDates = [
 ];
 
 export const songFiles = [
-  { id: 1, src: song1, name: "Dance Playful Night" },
-  { id: 2, src: song2, name: "Dark Cyberpunk" },
+  { id: 1, src: song1, name: "Dance Playful Night", length: "1:45" },
+  { id: 2, src: song2, name: "Dark Cyberpunk", length: "1:58" },
+  { id: 3, src: song3, name: "Running Night", length: "1:52" },
+  { id: 4, src: song4, name: "Tell Me What", length: "2:41" },
 ];
 
 // interface AppStore {
