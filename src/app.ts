@@ -8,36 +8,42 @@ export const links = {
   group2: { Store: "/store", Dates: "/dates", News: "/news" },
 };
 
-export const tourDates = [
+interface TourDate {
+  date: string;
+  venue: string;
+  location: string;
+  status: 0 | 1 | 2;
+}
+export const tourDates: TourDate[] = [
   {
     date: "2026-10-12",
     venue: "The Crystal Ballroom",
     location: "Portland, OR",
-    status: "Sold Out",
+    status: 0,
   },
   {
     date: "2026-10-15",
     venue: "The Fillmore",
     location: "San Francisco, CA",
-    status: "Available",
+    status: 2,
   },
   {
     date: "2026-10-20",
     venue: "Red Rocks Amphitheatre",
     location: "Morrison, CO",
-    status: "Available",
+    status: 2,
   },
   {
     date: "2026-11-02",
     venue: "Funkhaus",
     location: "Berlin, DE",
-    status: "Available",
+    status: 2,
   },
   {
     date: "2026-11-05",
     venue: "Roundhouse",
     location: "London, UK",
-    status: "Low Availability",
+    status: 1,
   },
 ];
 

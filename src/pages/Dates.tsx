@@ -1,6 +1,7 @@
 import wildImg from "../assets/wildtour.webp";
 import { tourDates } from "../app";
 import { format } from "date-fns";
+import BookButton from "../components/BookButton";
 
 const gradientStyle = {
   background:
@@ -10,11 +11,11 @@ const gradientStyle = {
 export default function Dates() {
   return (
     <div
-      className="flex flex-col items-center gap-4 bg-(--color-pri) w-full place-items-center 
-        p-4 rounded-md min-h-full"
+      className="flex flex-col items-center gap-4  w-full place-items-center 
+        rounded-md min-h-full overflow-x-hidden text-1"
     >
       <div
-        className="h-[100px] sm:h-[150px]  aspect-1000/475 min-w-0 relative overflow-hidden"
+        className="h-[100px] sm:h-[150px] mt-5 aspect-1000/475 min-w-0 relative overflow-hidden"
         style={{
           maskImage: `url(${wildImg})`,
           maskRepeat: "no-repeat",
@@ -27,7 +28,49 @@ export default function Dates() {
           style={gradientStyle}
         />
       </div>
-      <ol className="w-full flex flex-col gap-2 *:grid *:grid-cols-4 *:w-full *:text-center *:items-center">
+
+      <ol className="flex flex-col w-full">
+        {tourDates.map((tourDate, i) => (
+          <li
+            key={i}
+            className={`w-full place-items-center p-1 py-4 flex flex-col gap-2
+              ${i % 2 == 0 && "bg-black/10 dark:bg-gray-400/10"}`}
+          >
+            <section className="text-2">
+              <span className="font-bold">
+                {format(tourDate.date, "MM-dd-yyyy")}
+              </span>
+              <span> - {tourDate.location}</span>
+            </section>
+            <section className="flex items-center gap-2">
+              {`${tourDate.venue} - `}
+              <BookButton availability={tourDate.status} />
+            </section>
+          </li>
+        ))}
+      </ol>
+
+      {/* <div className="w-full h-full flex flex-col gap-1">
+        <div className="flex justify-evenly">
+          
+        </div>
+        {tourDates.map((tourDate, i) => (
+          <div
+            className={`flex justify-evenly
+            ${i % 2 == 0 && "bg-black/10 dark:bg-white/10"}`}
+          >
+            <th scope="row" className="">
+              {format(tourDate.date, "MM/dd/yyyy")}
+            </th>
+            <td>{tourDate.location}</td>
+            <td>{tourDate.venue}</td>
+            <td className="place-items-center">
+              <BookButton availability={tourDate.status} />
+            </td>
+          </div>
+        ))}
+      </div> */}
+      {/* <ol className="w-full flex flex-col gap-2 *:grid *:grid-cols-4 *:w-full *:text-center *:items-center">
         <li className="py-2 text--1 bg-(--color-sec)">
           <span>MM-DD-YYYY</span>
           <span>City</span>
@@ -44,7 +87,7 @@ export default function Dates() {
             </li>
           );
         })}
-      </ol>
+      </ol> */}
     </div>
   );
 }

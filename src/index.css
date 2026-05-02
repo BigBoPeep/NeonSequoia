@@ -7,7 +7,7 @@ html {
 
 @layer base {
   :root {
-    @apply bg-(--color-pri) text-0 text-text tracking-wide;
+    @apply bg-(--color-pri) text-text tracking-wide [font-size:12px];
     animation: neon-colors 20s linear infinite;
   }
   * {
@@ -21,7 +21,6 @@ html {
 
 @theme {
   --default-font-family: "Audiowide", var(--font-sans);
-
   --text--2: clamp(0.6076rem, 0.5944rem + 0.0588vw, 0.64rem);
   --text--1: clamp(0.7292rem, 0.7002rem + 0.1288vw, 0.8rem);
   --text-0: clamp(0.875rem, 0.8239rem + 0.2273vw, 1rem);
